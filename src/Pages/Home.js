@@ -15,6 +15,14 @@ import Photo4 from '../Assets/Images/Cloud/Min.jpg';
 
 export default function Home() {
 
+const onSwipe = (direction) => {
+  console.log('You swiped: ' + direction)
+}
+
+const onCardLeftScreen = (myIdentifier) => {
+  console.log(myIdentifier + ' left the screen')
+}
+
 const db = [
   {
     name: 'Jisoo',
@@ -35,7 +43,7 @@ const db = [
 ]
 
 const [currentIndex, setCurrentIndex] = useState(db.length - 1)
-  const [ setLastDirection] = useState()
+  const [lastDirection, setLastDirection] = useState()
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
 
@@ -55,7 +63,7 @@ const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const canGoBack = currentIndex < db.length - 1
 
   const canSwipe = currentIndex >= 0
-  const swiped = (direction, index) => {
+  const swiped = (direction, nameToDelete, index) => {
     setLastDirection(direction)
     updateCurrentIndex(index - 1)
   }
@@ -68,7 +76,7 @@ const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   }
 
   const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex   < db.length) {
       await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
     }
   }
@@ -105,7 +113,7 @@ const [currentIndex, setCurrentIndex] = useState(db.length - 1)
         <Fab id="hate" sx={{ bgcolor: '#FFF', color: '#F27121' }} onClick={() => swipe('left')} aria-label="hate">
             <Nope />
         </Fab>
-        <Fab id="love" sx={{ bgcolor: '#E94057', color: '#FFF', width: 70, height: 70, margin:5 }} onClick={() => swipe('right')} aria-label="like">
+        <Fab id="love" sx={{ bgcolor: '#E94057', color: '#FFF', width: 75, height: 75, margin:5 }} onClick={() => swipe('right')} aria-label="like">
             <Love />
         </Fab>
         <Fab sx={{ bgcolor: '#FFF', color: '#8A2387' }} onClick={() => goBack()} aria-label="back">

@@ -19,6 +19,7 @@ import Payment from './Pages/Payment';
 import Matches from './Pages/Matches';
 import Support from './Pages/Support';
 import Policy from './Pages/Policy';
+import Profile from './Pages/Profile'
 
 
 
@@ -41,6 +42,8 @@ function App() {
             <Route path="/Matches" element= {<Matches/>} />
             <Route path="/Support" element= {<Support/>} />
             <Route path="/Policy" element= {<Policy/>} />
+            <Route path="/Profile" element= {<Profile/>} />
+
           </Routes>
         {/* </Layout> */}
       </Router>
